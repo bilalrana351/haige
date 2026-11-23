@@ -1,0 +1,23 @@
+# Local credentials; keep configuration examples versioned.
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# Dependencies and generated output in either application.
+node_modules/
+.next/
+.wrangler/
+.vercel/
+dist/
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# Local data and diagnostics.
+.data/
+.DS_Store
+*.log

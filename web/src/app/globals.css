@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* HAIGE design tokens, v3: cream, ink, orange. See docs/DESIGN-SYSTEM.md.
+   Cream is the page. Ink is type and primary actions. Orange marks what HAIGE found or changed.
+   Night is a full token set applied per section with .theme-night. */
+:root {
+  color-scheme: light;
+  --paper: #f4f0e6;
+  --paper-raised: #fbf8f1;
+  --paper-sunk: #ebe6d9;
+  --line: #dcd6c6;
+  --line-strong: #bfb8a5;
+  --ink: #15130f;
+  --ink-2: #57534a;
+  --ink-3: #6b665b;
+  --signal: #ff5a1f;
+  --signal-hover: #f04a10;
+  --signal-soft: #fbe3d2;
+  --signal-ink: #15130f;
+  /* Orange fails contrast as text on cream, so text uses this deeper cut. */
+  --signal-text: #b93d0a;
+  --ok: #1b7046;
+  --ok-soft: #dcebdc;
+  --shadow-tint: 40 32 16;
+}
+
+.theme-night {
+  color-scheme: dark;
+  --paper: #12110e;
+  --paper-raised: #1c1a16;
+  --paper-sunk: #0b0a08;
+  --line: #2a2822;
+  --line-strong: #3f3c33;
+  --ink: #f4f0e6;
+  --ink-2: #ada899;
+  --ink-3: #8a8576;
+  --signal: #ff6a2b;
+  --signal-hover: #ff8250;
+  --signal-soft: #33170a;
+  --signal-ink: #15130f;
+  --signal-text: #ff6a2b;
+  --ok: #4cc38a;
+  --ok-soft: #10291d;
+  --shadow-tint: 0 0 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-raised: var(--paper-raised);
+  --color-sunk: var(--paper-sunk);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-signal: var(--signal);
+  --color-signal-hover: var(--signal-hover);
+  --color-signal-soft: var(--signal-soft);
+  --color-signal-ink: var(--signal-ink);
+  --color-signal-text: var(--signal-text);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+
+  /* Two voices from one superfamily: serif for headings, sans for everything else. */
+  --font-display: var(--font-source-serif), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-source-sans), system-ui, sans-serif;
+
+  --text-hero: clamp(2.75rem, 1.35rem + 5.4vw, 5.75rem);
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.03em;
+  --text-h2: clamp(2.125rem, 1.4rem + 2.6vw, 3.75rem);
+  --text-h2--line-height: 1.04;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.015em;
+  --text-lead: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  --text-lead--line-height: 1.5;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.45;
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.3;
+
+  /* Controls are pills. Surfaces step up from card to panel. */
+  --radius-control: 999px;
+  --radius-chip: 6px;
+  --radius-card: 14px;
+  --radius-panel: 24px;
+
+  --shadow-card: 0 1px 1px rgb(var(--shadow-tint) / 0.04), 0 10px 28px -10px rgb(var(--shadow-tint) / 0.12);
+  --shadow-float: 0 1px 2px rgb(var(--shadow-tint) / 0.05), 0 28px 64px -16px rgb(var(--shadow-tint) / 0.22);
+  /* Motion curves. Enter/exit: ease-out. On-screen movement: ease-in-out. Built-in easings are too weak. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+html {
+  /* Source Sans runs small for its point size, so the whole scale sits on a 17px root. */
+  font-size: 106.25%;
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* In the base layer so Tailwind utilities can still override them. */
+@layer base {
+  /* No double-tap zoom delay on controls, and long-press does not select their label. */
+  button,
+  a,
+  [role="button"],
+  [role="tab"] {
+    touch-action: manipulation;
+  }
+  button,
+  [role="button"],
+  [role="tab"] {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Hover color changes ease in. Tailwind's hover: variant is already gated to hover-capable pointers. */
+  a,
+  button {
+    transition:
+      color 150ms ease,
+      text-decoration-color 150ms ease,
+      background-color 150ms ease;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+/* In the base layer so a component can opt out with outline-none when its frame shows focus instead. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Press feedback: a subtle scale so the control feels like it heard the tap. */
+.pressable {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease,
+    transform 160ms var(--ease-out);
+}
+.pressable:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Hero entrance runs as CSS so it stays smooth while the page is still loading scripts. */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+.enter {
+  animation: enter 800ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Entrances that appear after a state change, without a mount effect. */
+.pop-in {
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+.drop-in {
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Touch devices skip scroll reveals: mobile browsers are unreliable about reporting elements in view,
+   which can leave a section invisible. The stylesheet !important beats Motion's inline opacity/transform. */
+@media (hover: none) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee {
+    animation: none;
+  }
+  /* Reduced motion keeps the fade, drops the travel. */
+  @keyframes enter {
+    from {
+      opacity: 0;
+    }
+  }
+  .pressable:active:not(:disabled) {
+    transform: none;
+  }
+}

@@ -1,0 +1,20 @@
+# HAIGE
+
+> HAIGE (AI Growth Engine) helps B2B companies get found in two places: ranked in Google search results, and named in the answers that ChatGPT, Gemini and Claude give to buyers. It measures where a company is missing, diagnoses why, drafts the fix, and publishes only after a person on the company's team approves that exact version. It then measures the result.
+
+## How it works
+
+1. Monitor: asks AI engines the questions a company's buyers ask, and checks its Google rankings for the same topics.
+2. Diagnose: when a competitor is named and the company is not, shows the reason.
+3. Draft: writes the change in full, such as a page update, a blog post or a reply.
+4. Approve: a person on the company's team reads the exact version and approves it.
+5. Measure: asks the same questions again and reports what changed, with dates.
+
+## Product rules
+
+- Nothing publishes without explicit human approval.
+- Results are reported as dated, repeated measurements, never a single score.
+
+## Status
+
+Early access. Accounts can be created now; teams are brought in a few at a time.

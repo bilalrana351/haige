@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "haige-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  // The WorkOS SDK and jose use a few Node built-ins.
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // Non-secret settings. DATABASE_URL and WORKOS_API_KEY are secrets: `wrangler secret put <NAME>`.
+  "vars": {
+    "WORKOS_CLIENT_ID": "client_01M7G922K2GYD5SSRC9FW1Y3S0",
+    "CORS_ORIGINS": "https://haige-landing.vercel.app,http://localhost:3000"
+  }
+}

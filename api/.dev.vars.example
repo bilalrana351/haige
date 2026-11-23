@@ -1,0 +1,12 @@
+# Local settings for `wrangler dev` and drizzle-kit. Copy to .dev.vars and fill in.
+# Never commit .dev.vars. In production these are set on the Worker (see README).
+
+# Postgres connection string. Neon: use the pooled connection string from the dashboard.
+DATABASE_URL=postgresql://user:password@host/neondb?sslmode=require
+
+# WorkOS (dashboard.workos.com > API Keys). The client ID is the same one the web app uses.
+WORKOS_CLIENT_ID=client_...
+WORKOS_API_KEY=sk_test_...
+
+# Comma-separated origins allowed to call the API from a browser.
+CORS_ORIGINS=http://localhost:3000
